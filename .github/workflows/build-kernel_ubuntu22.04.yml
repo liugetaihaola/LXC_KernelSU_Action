@@ -113,6 +113,8 @@ jobs:
       if: env.ENABLE_KERNELSU == 'true'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
+        cat arch/${{ env.ARCH }}/configs/vendor/xiaomi/mi845_defconfig > arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
+        cat arch/${{ env.ARCH }}/configs/vendor/xiaomi/polaris.config >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
         curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s ${{ env.KERNELSU_TAG }}
         echo "UPLOADNAME=-KernelSU" >> $GITHUB_ENV
 
